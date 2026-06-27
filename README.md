@@ -106,7 +106,7 @@ CMakePythonVenv_install_packages(
 
 ## Contributing
 
-Contributions are welcome! Please submit issues and pull requests on GitHub.
+Contributions are welcome! Please submit issues and pull requests on [GitHub](https://github.com/gscatto/CMakePythonVenv).
 
 ## License
 
