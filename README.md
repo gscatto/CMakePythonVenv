@@ -16,8 +16,8 @@ Add CMakePythonVenv to your CMake project using `FetchContent`:
 ```cmake
 include(FetchContent)
 FetchContent_Declare(CMakePythonVenv
-    GIT_REPOSITORY "..."
-    GIT_TAG "..."
+    GIT_REPOSITORY "https://github.com/gscatto/CMakePythonVenv"
+    GIT_TAG "3e827c3e503837671640d5df4969dfe07d9b70bb"
 )
 FetchContent_MakeAvailable(CMakePythonVenv)
 get_property(CMakePythonVenv_CMAKE_MODULE_PATH
