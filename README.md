@@ -49,6 +49,8 @@ find_package(Python)
 
 ## API Reference
 
+[CMakePythonVenv_create_virtual_environment()](#cmakepythonvenv_create_virtual_environment) | [CMakePythonVenv_install_packages()](#cmakepythonvenv_install_packages)
+
 ### CMakePythonVenv_create_virtual_environment()
 
 Creates a new Python virtual environment.
