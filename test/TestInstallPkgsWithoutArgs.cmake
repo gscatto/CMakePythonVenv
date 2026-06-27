@@ -1,0 +1,2 @@
+include(CMakePythonVenvMain)
+CMakePythonVenv_install_packages()

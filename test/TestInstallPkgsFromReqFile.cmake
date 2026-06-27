@@ -1,0 +1,38 @@
+include(CMakePythonVenvMain)
+
+function(CMakePythonVenv_is_target_defined name output_var)
+    if(NOT "${name}" STREQUAL "hello")
+        message(FATAL_ERROR "unexpected NAME")
+    endif()
+    set("${output_var}" TRUE PARENT_SCOPE)
+endfunction()
+
+function(CMakePythonVenv_get_property output_var)
+    cmake_parse_arguments(args "" "TARGET;PROPERTY" "" ${ARGN})
+    if(NOT "${args_TARGET}" STREQUAL "hello")
+        message(FATAL_ERROR "unexpected TARGET")
+    endif()
+    if(NOT "${args_PROPERTY}" STREQUAL "ENV_DIR")
+        message(FATAL_ERROR "unexpected PROPERTY")
+    endif()
+    set("${output_var}" "/path/to/venv" PARENT_SCOPE)
+endfunction()
+
+macro(CMakePythonVenv_find_package name)
+    if(NOT "${name}" STREQUAL "Python")
+        message(FATAL_ERROR "unexpected package name")
+    endif()
+    set(Python_EXECUTABLE "/path/to/python")
+endmacro()
+
+function(CMakePythonVenv_execute_process)
+    cmake_parse_arguments(args "" "RESULT_VARIABLE" "COMMAND" ${ARGN})
+    if(NOT "/path/to/python;-m;pip;install;-r;/path/to/cmake/current/source/dir/requirements.txt" STREQUAL "${args_COMMAND}")
+        message(FATAL_ERROR "unexpected CMakePythonVenv_execute_process call, got \"${args_COMMAND}\"")
+    endif()
+    set("${args_RESULT_VARIABLE}" 0 PARENT_SCOPE)
+endfunction()
+
+set(CMAKE_CURRENT_SOURCE_DIR "/path/to/cmake/current/source/dir")
+
+CMakePythonVenv_install_packages(NAME hello REQUIREMENTS_FILE requirements.txt)

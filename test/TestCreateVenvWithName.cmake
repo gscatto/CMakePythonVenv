@@ -1,0 +1,41 @@
+include(CMakePythonVenvMain)
+
+function(CMakePythonVenv_is_target_defined name output_var)
+    set("${output_var}" FALSE PARENT_SCOPE)
+endfunction()
+
+function(CMakePythonVenv_add_custom_target name)
+    if(NOT "${name}" STREQUAL "simple")
+        message(FATAL_ERROR "unexpected PythonVenv_add_custom_target call")
+    endif()
+endfunction()
+
+function(CMakePythonVenv_find_program)
+    list(POP_FRONT ARGN python_executable_var)
+    if(NOT "python3;NO_CACHE;REQUIRED" STREQUAL "${ARGN}")
+        message(FATAL_ERROR "unexpected PythonVenv_find_program call")
+    endif()
+    set("${python_executable_var}" "/usr/bin/python3" PARENT_SCOPE)
+endfunction()
+
+function(CMakePythonVenv_execute_process)
+    cmake_parse_arguments(args "" "RESULT_VARIABLE" "COMMAND" ${ARGN})
+    if(NOT "/usr/bin/python3;-m;venv;path/to/cmake/binary/dir/simple.dir" STREQUAL "${args_COMMAND}")
+        message(FATAL_ERROR "unexpected PythonVenv_execute_process call")
+    endif()
+    set("${args_RESULT_VARIABLE}" "0" PARENT_SCOPE)
+endfunction()
+
+function(CMakePythonVenv_set_property)
+    cmake_parse_arguments(args "" "TARGET" "PROPERTY" ${ARGN})
+    if(NOT "${args_TARGET}" STREQUAL "simple")
+        message(FATAL_ERROR "unexpected PythonVenv_set_property call")
+    endif()
+    if(NOT "${args_PROPERTY}" STREQUAL "ENV_DIR;path/to/cmake/binary/dir/simple.dir")
+        message(FATAL_ERROR "unexpected PythonVenv_set_property call")
+    endif()
+endfunction()
+
+set(CMAKE_BINARY_DIR "path/to/cmake/binary/dir")
+
+CMakePythonVenv_create_virtual_environment(NAME simple)
